@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+# Turbopack / Turbo cache
+.turbo/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Testing / coverage
+coverage/
+.nyc_output/
+
+# Build artifacts
+build/
+dist/
+
+# Package manager
+.pnp
+.pnp.js
+
+# Framework caches
+.cache/
+.vercel/
+
+# Misc
+*.swp
+*.local
+.sentryclirc

@@ -1,0 +1,247 @@
+import type { StaticImageData } from "next/image";
+import food1 from "@/assets/food 1.png";
+import food2 from "@/assets/food 2.png";
+import food3 from "@/assets/food 3.png";
+import food4 from "@/assets/food 4.png";
+import food5 from "@/assets/food 5.png";
+import food6 from "@/assets/food 6.png";
+import food7 from "@/assets/food 7.png";
+import food8 from "@/assets/food 8.png";
+
+export type BlogPost = {
+  id: number;
+  slug: string;
+  title: string;
+  excerpt: string;
+  image: StaticImageData;
+  date: string;
+  tags: string[];
+  body: string[];
+};
+
+const posts: BlogPost[] = [
+  {
+    id: 1,
+    slug: "budapest-goulash-essentials",
+    title: "Budapest Goulash Essentials",
+    excerpt: "Hungary’s iconic beef-and-paprika soup, slow‑simmered until the meat turns buttery and the broth becomes a cozy embrace.",
+    image: food1,
+    date: "2025-09-01",
+    tags: ["goulash", "beef", "paprika"],
+    body: [
+      "Goulash is more than a dish in Hungary—it’s a ritual and a symbol of hospitality.",
+      "Start with well‑marbled beef shank or chuck; dry it and brown in batches for deep fond.",
+      "Pile on sweet onions and let them collapse into a jammy base that sweetens the stew.",
+      "Bloom good Hungarian paprika in fat off the heat so it turns fragrant, not bitter.",
+      "Add caraway, bay, and a touch of garlic; the aroma should be warm and inviting.",
+      "Stir in stock, then add potatoes and carrots for body and gentle sweetness.",
+      "Simmer low and slow until collagen melts and the broth becomes brick‑red and silky.",
+      "Adjust thickness with a splash of stock or reduce uncovered for a heartier style.",
+      "Finish with salt and a squeeze of lemon to lift; rest 10 minutes before serving.",
+      "Serve with crusty bread; a spoon of sour cream is optional but luxurious.",
+      "Use fresh, vivid‑red paprika; stale paprika tastes dull and dusty.",
+      "If spice‑sensitive, blend mostly sweet paprika with just a pinch of hot.",
+      "For a vegetarian riff, build fond with mushrooms, then add beans for body.",
+      "Traditional add‑ins like csipetke (pinched noodles) make it extra hearty.",
+      "Make‑ahead friendly: flavors deepen overnight; reheat gently at a bare simmer.",
+      "Sprinkle chopped parsley at the end for color and a fresh herbal lift.",
+    ],
+  },
+  {
+    id: 2,
+    slug: "creamy-chicken-paprikash",
+    title: "Creamy Chicken Paprikash",
+    excerpt: "Tender chicken stewed in a silky paprika sauce finished with sour cream—pure Hungarian comfort.",
+    image: food2,
+    date: "2025-09-05",
+    tags: ["chicken", "paprikash", "comfort food"],
+    body: [
+      "Paprikash begins with onions cooked low and slow until sweet and golden—patience pays off.",
+      "Remove the pot from heat, then bloom sweet paprika so it perfumes the base without scorching.",
+      "Return to gentle heat with chicken thighs and a little stock; never let it boil angrily.",
+      "Cover and braise until the meat is tender and the juices run clear into the sauce.",
+      "Whisk a ladle of hot sauce into sour cream, then stir back in off heat for silkiness.",
+      "Season to balance: salt brings depth, a pinch of hot paprika adds pleasant warmth.",
+      "Serve with nokedli or wide buttered noodles that catch every drop of sauce.",
+      "Fresh parsley and lemon zest on top brighten the dish and cut the richness.",
+      "Leftovers reheat beautifully—just keep the sauce below a simmer to avoid curdling.",
+      "Pair with a crisp white wine or pilsner; both let paprika and dairy harmonize.",
+      "Bone‑in thighs bring extra flavor; pull the bones before serving if you like.",
+      "Keep the dairy smooth by tempering—don’t boil after adding sour cream.",
+      "Smoked paprika is optional; a pinch adds depth without taking over.",
+      "For a lighter version, swap part of the sour cream for tangy yogurt.",
+      "On reheat, loosen with stock or milk to restore the sauce’s silky flow.",
+      "Finish with crispy shallots or a drizzle of paprika oil for restaurant polish.",
+    ],
+  },
+  {
+    id: 3,
+    slug: "street-food-langos",
+    title: "Street‑Food Star: Lángos",
+    excerpt: "Crisp, chewy, blistered dough topped with garlicky sour cream and a snowfall of cheese—Hungary’s favorite street bite.",
+    image: food3,
+    date: "2025-09-10",
+    tags: ["street food", "langos", "snack"],
+    body: [
+      "Lángos is joy in a circle: a soft yeasted dough stretched by hand and fried until golden.",
+      "Inside stays chewy and tender while the surface blisters into delicate crispness.",
+      "A quick brush of garlic oil perfumes the bread without overpowering it.",
+      "Cool sour cream spreads like velvet, melting into the warmth of the dough.",
+      "Finish with grated cheese; add pickled peppers, smoked sausage, or ham if you like.",
+      "Rested dough and oil around 175–185°C make it puff beautifully without greasing.",
+      "Drain briefly on a rack to preserve crispness, then top immediately.",
+      "Serve hot with napkins; it’s comforting, messy, and wonderfully shareable.",
+      "Sweet versions—cinnamon sugar or jam—turn lángos into a playful dessert.",
+      "Great with cold beer or lemonade on a sunny afternoon.",
+      "Knead just until smooth; over‑kneading makes the dough tight and less airy.",
+      "Proof until puffy; under‑proofed dough won’t blister or rise properly in oil.",
+      "Use a neutral, high‑heat oil and fry in small batches to hold temperature.",
+      "Set up a topping station so you can serve immediately while it’s crisp.",
+      "For kids, finish with powdered sugar; for adults, try garlic‑confit oil.",
+      "Best eaten right away—lángos softens as it cools.",
+    ],
+  },
+  {
+    id: 4,
+    slug: "porkolt-beef-stew",
+    title: "Pörkölt: The Bold Beef Stew",
+    excerpt: "A thicker cousin of goulash—deep, spicy, and glossy with paprika. Serve with nokedli for the full experience.",
+    image: food4,
+    date: "2025-09-15",
+    tags: ["porkolt", "beef", "stew"],
+    body: [
+      "Pörkölt builds power from simplicity: meat, onions, paprika, and time.",
+      "Brown cubes of beef until crusted; fond is flavor that will dissolve into the sauce.",
+      "Cover with onions and let them surrender into sweetness before adding paprika.",
+      "Stir in stock and simmer uncovered until the sauce reduces and turns glossy.",
+      "Unlike goulash, the goal is a thick coating, not a soup—think shiny and clingy.",
+      "A small knob of butter or tallow at the end rounds edges and adds sheen.",
+      "Taste for salt, then brighten with a teaspoon of vinegar to wake the paprika.",
+      "Serve with nokedli, buttered potatoes, or polenta; anything that catches sauce.",
+      "Leftovers improve overnight as flavors marry and the sauce settles.",
+      "Pair with malty lager or a light, juicy red that won’t bully the paprika.",
+      "If using pork or game, adjust timing—leaner meats cook faster and stay tender.",
+      "Keep a generous onion‑to‑meat ratio (about 1:1 by weight) for depth.",
+      "Add paprika off heat; scorching makes it bitter and dull.",
+      "Optional tomato paste adds gentle sweetness and boosts color.",
+      "Serve with sharp pickles to cut richness and refresh the palate.",
+      "Freezes well; reheat slowly to keep the glaze glossy.",
+    ],
+  },
+  {
+    id: 5,
+    slug: "halaszle-fishermans-soup",
+    title: "Halászlé: Fisherman’s Soup",
+    excerpt: "River fish, paprika, and steam—Hungarian fishermen’s tradition from the Danube and Tisza.",
+    image: food5,
+    date: "2025-09-20",
+    tags: ["fish", "soup", "paprika"],
+    body: [
+      "Fisherman’s soup is fiery and clear, built on a robust stock from bones and heads.",
+      "Skim patiently for clarity; a clean broth makes paprika’s color shine.",
+      "Add sweet and hot paprika in stages so heat doesn’t overwhelm flavor.",
+      "Slip in fillets at a bare simmer; turbulence will break them apart.",
+      "Season simply—salt and a little sugar can round sharp edges.",
+      "A dash of vinegar or lemon at the end brightens and lifts the spice.",
+      "Serve with fresh bread, sliced chilies, and raw onion for crunch.",
+      "Smoked paprika can be added sparingly for depth if you enjoy smokiness.",
+      "Great as a starter before grilled fish or a hearty stew.",
+      "Leftover broth becomes a base for rice or seafood the next day.",
+      "Common fish include carp, catfish, and perch—mixing species builds complexity.",
+      "Use very fresh, bright‑red paprika; stale spice muddies the flavor and color.",
+      "Strain through fine mesh for elegance or leave rustic for tradition.",
+      "Add sliced peppers at the end for crunch and a fresh aroma.",
+      "Serve family‑style with extra bread and hot paprika on the side.",
+      "Chill leftovers overnight—the fat cap lifts off easily before reheating.",
+    ],
+  },
+  {
+    id: 6,
+    slug: "dobos-torte-crunchy-caramel",
+    title: "Dobos Torte: Crunch + Cream",
+    excerpt: "Thin sponge layers, smooth chocolate buttercream, and a caramel crown that cracks like glass.",
+    image: food6,
+    date: "2025-09-25",
+    tags: ["dessert", "cake", "caramel"],
+    body: [
+      "Dobos torte is elegance in layers: thin sponge, cocoa‑rich buttercream, repeat.",
+      "Bake sheets of sponge just until set; overbaking dries and cracks them.",
+      "Buttercream should be silky, not heavy—beat until light and glossy.",
+      "The caramel lid is the signature: pour, tilt quickly, and mark slices before hardening.",
+      "A pinch of salt keeps caramel snappy and reins in sweetness.",
+      "Chill briefly to set, then temper to cool room temperature before serving.",
+      "Wipe the knife with hot water between cuts for pristine layers.",
+      "Garnish simply; let the geometry and shine do the talking.",
+      "Strong coffee or a sip of Tokaji is a classic, grown‑up pairing.",
+      "Leftovers store well covered; the caramel stays crisp if kept dry.",
+      "Use room‑temperature eggs for better sponge volume and even texture.",
+      "Stabilize buttercream with a little melted chocolate if your kitchen is warm.",
+      "Aim for deep‑amber caramel—complex but not bitter—for flavor and color.",
+      "Lightly oil a knife or ruler to pre‑mark wedges before the caramel fully sets.",
+      "Refrigerate uncovered 10 minutes to set the surface, then cover to store.",
+      "Keep slices upright in a low‑humidity fridge; moisture softens the caramel lid.",
+    ],
+  },
+  {
+    id: 7,
+    slug: "smoked-sausage-beer-pairings",
+    title: "Smoked Sausage & Beer Pairings",
+    excerpt: "Peppery kolbász, mustard, and fresh bread—made even better with the right pint.",
+    image: food7,
+    date: "2025-09-28",
+    tags: ["sausage", "beer", "pairing"],
+    body: [
+      "Hungarian kolbász runs from mildly smoky to boldly peppery—build a mixed board.",
+      "Offer mustards, pickles, raw onion, and fresh herbs to refresh the palate.",
+      "Light, crisp pilsners flatter delicate sausages and cleanse between bites.",
+      "Amber lagers, Vienna styles, or dunkel stand up to smoke and paprika.",
+      "Hoppy IPAs can clash with heat; try balanced, malt‑forward beers instead.",
+      "Add rye or country bread for chew and a little sour tang.",
+      "Cheese, kraut, and pickled peppers add fat, acid, and crunch to the spread.",
+      "Serve at room temperature; cold fat mutes aroma and texture.",
+      "Finish with a lightly sweet dessert beer or coffee to reset the palate.",
+      "Perfect for casual gatherings where everyone can build their own bite.",
+      "Slice links on a bias for more sear and aroma; warm gently so casings don’t burst.",
+      "Offer both mild and hot mustards so guests can tune spice levels.",
+      "Fresh dill and parsley add brightness to heavy, smoky boards.",
+      "Pickled onions or beets bring sweetness and acid to balance fat and smoke.",
+      "End with crisp apples or warm pretzels to refresh the palate.",
+    ],
+  },
+  {
+    id: 8,
+    slug: "stuffed-cabbage-toltott-kaposzta",
+    title: "Stuffed Cabbage (Töltött Káposzta)",
+    excerpt: "Slow‑braised cabbage rolls filled with pork and rice, simmered in a tangy tomato‑paprika sauce.",
+    image: food8,
+    date: "2025-10-01",
+    tags: ["cabbage", "pork", "classic"],
+    body: [
+      "Tender cabbage leaves wrap a savory mix of pork, rice, onion, and garlic.",
+      "Blanch leaves just until pliable; too soft and they’ll tear while rolling.",
+      "Nestle the rolls in a paprika‑tomato sauce with bay and a few peppercorns.",
+      "Smoked ribs or bacon in the pot add gentle depth without overpowering.",
+      "Simmer low and slow until the rice is tender and the rolls hold together.",
+      "Let the dish rest 15 minutes; the sauce thickens and flavors settle.",
+      "Serve with sour cream, dill, and warm bread to swipe through the sauce.",
+      "Reheats beautifully—next‑day stuffed cabbage is famously better.",
+      "Freeze extra portions tightly wrapped; they thaw and reheat like a dream.",
+      "Generous, homestyle cooking that feeds a crowd with ease.",
+      "Choose savoy or green cabbage; savoy’s crinkled leaves roll more easily.",
+      "Don’t overpack—tight rolls can burst as rice expands during the braise.",
+      "A layer of sauerkraut under the rolls adds tang and keeps bottoms from scorching.",
+      "Check seasoning mid‑braise; the sauce concentrates and may need a pinch of salt.",
+      "Serve with mashed potatoes for extra comfort on cold nights.",
+      "These freeze beautifully; thaw in the fridge before reheating gently.",
+    ],
+  },
+];
+
+export default posts;
+export const totalPosts = posts.length;
+export function getPostBySlug(slug: string) {
+  return posts.find((p) => p.slug === slug);
+}
+export function getIndexBySlug(slug: string) {
+  return posts.findIndex((p) => p.slug === slug);
+}

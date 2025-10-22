@@ -1,0 +1,620 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom utility classes */
+.center-dash {
+  /* crisp vertical dash column */
+  content: '';
+  position: absolute;
+  top: var(--line-top, 0);
+  bottom: var(--line-bottom, 0);
+  width: 2px; /* thicker for visibility */
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8) 0px,
+    rgba(0, 0, 0, 0.8) 7px,
+    rgba(0, 0, 0, 0) 7px,
+    rgba(0, 0, 0, 0) 16px
+  );
+}
+
+/* Standardized height utilities */
+.min-h-screen {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Animation delay utilities */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+
+/* Text outline for headings */
+.text-outline {
+  text-shadow: 
+    0 2px 0 #000, 
+    2px 0 0 #000, 
+    0 -2px 0 #000, 
+    -2px 0 0 #000, 
+    2px 2px 0 #000, 
+    -2px 2px 0 #000, 
+    2px -2px 0 #000, 
+    -2px -2px 0 #000;
+}
+
+/* Standardized reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Transition delay utilities */
+.td-0 { transition-delay: 0ms; }
+.td-120 { transition-delay: 120ms; }
+.td-160 { transition-delay: 160ms; }
+.td-200 { transition-delay: 200ms; }
+.td-240 { transition-delay: 240ms; }
+.td-320 { transition-delay: 320ms; }
+.td-360 { transition-delay: 360ms; }
+.td-480 { transition-delay: 480ms; }
+.td-600 { transition-delay: 600ms; }
+.td-640 { transition-delay: 640ms; }
+
+/* Component-specific background styles */
+.chef-special-bg {
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+  background-size: 2px 100%;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Tile component positioning using CSS variables */
+.tile {
+  left: var(--left);
+  top: var(--top);
+  transform: translateY(var(--translate-y)) rotate(var(--rotate)) scale(var(--scale));
+  transform-origin: center;
+  opacity: var(--opacity);
+}
+
+/* Letter component transform using CSS variables */
+.letter {
+  transform: translateY(var(--translate-y)) scale(var(--scale));
+}
+
+/* Red dot cloud background */
+.red-dot-cloud-bg {
+  background-color: #ef2d2d;
+  background-image:
+    radial-gradient(rgba(0,0,0,0.28) 0.8px, rgba(0,0,0,0) 0.8px),
+    radial-gradient(rgba(0,0,0,0.18) 1.2px, rgba(0,0,0,0) 1.2px),
+    radial-gradient(1200px 600px at 15% 30%, rgba(0,0,0,0.12), rgba(0,0,0,0) 60%),
+    radial-gradient(1000px 500px at 85% 70%, rgba(0,0,0,0.10), rgba(0,0,0,0) 60%);
+  background-size: 12px 12px, 18px 18px, auto, auto;
+  background-blend-mode: normal, normal, multiply, multiply;
+}
+
+.food-gallery-bg {
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+  background-size: 2px 100%;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.top-categories-bg {
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+  background-size: 2px 100%;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+/* Single cover background for the Booking process section */
+.booking-bg {
+  background-image: url("../assets/background2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Reusable dotted paper background (same as global), for sections */
+.beer-section-bg {
+  background-image: url("../assets/background.png");
+  background-size: 850px 850px;
+  background-repeat: repeat;
+  background-position: top left;
+}
+
+/* Prevent accidental horizontal scroll on any device */
+html {
+  overflow-x: hidden;
+  overflow-y: auto; /* html scrolls */
+}
+body {
+  overflow-x: hidden;
+  overflow-y: hidden; /* body does NOT scroll */
+}
+
+/* Crisp vertical dividers between direct children (all breakpoints) */
+.nav-divider > * + * {
+  position: relative;
+}
+.nav-divider > * + *::before {
+  content: "";
+  position: absolute;
+  left: -0.5px; /* crisper line */
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: theme('colors.borderline');
+  pointer-events: none;
+}
+
+/* Divider utilities (desktop only so mobile stays clean) */
+@media (min-width: 768px) {
+  .md-nav-divider > * + * {
+    position: relative;
+  }
+  .md-nav-divider > * + *::before {
+    content: "";
+    position: absolute;
+    left: -0.5px; /* crisper line */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: theme('colors.borderline');
+    pointer-events: none;
+  }
+}
+
+/* Transition delay utilities for reveal animations */
+.td-0 { transition-delay: 0ms; }
+.td-120 { transition-delay: 120ms; }
+.td-160 { transition-delay: 160ms; }
+.td-240 { transition-delay: 240ms; }
+.td-320 { transition-delay: 320ms; }
+.td-360 { transition-delay: 360ms; }
+.td-480 { transition-delay: 480ms; }
+.td-600 { transition-delay: 600ms; }
+.td-640 { transition-delay: 640ms; }
+
+.container-max {
+  max-width: 1200px;
+}
+
+/* Hide scrollbar for elements that use horizontal overflow (like the navbar on small screens) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox - part of CSS Scrollbars Module Level 1 */
+}
+
+/* (nav-link underline styles removed on request) */
+
+/* Global background image */
+body {
+  background-image: url("../assets/background.png");
+  /* Average/normal dot size */
+  background-size: 850px 850px;
+  background-repeat: repeat;
+  background-position: top left;
+  /* Avoid 'fixed' on Windows which can produce a second inner scrollbar with sticky sections */
+  background-attachment: scroll;
+}
+
+/* Outline effect for large hero text (red fill with black outline) */
+.text-outline {
+  -webkit-text-stroke: 2px #000000; /* mobile */
+  paint-order: stroke fill; /* ensure stroke paints before fill */
+  text-shadow:
+    2px 0 0 #000000,
+    -2px 0 0 #000000,
+    0 2px 0 #000000,
+    0 -2px 0 #000000,
+    -1px 1px 0 #000000,
+    1px -1px 0 #000000,
+    -1px -1px 0 #000000; /* fallback for browsers without text-stroke */
+}
+
+ /* Subtle drop shadow for black headlines */
+ .black-drop {
+   text-shadow: 0 1px 0 #000000, 0 2px 0 #000000;
+ }
+
+ /* Subtle readability boost for light text on saturated backgrounds */
+ .beige-drop {
+   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.65);
+ }
+
+ /* Extra soft drop-shadow for the red line to mimic depth */
+ .soft-drop {
+   filter: drop-shadow(0 2px 0 #000000);
+ }
+ 
+ /* Red filled text with bold black outline and offset shadow (for DISHES?) */
+ .red-offset {
+   color: #ef2d2d; /* red fill */
+   -webkit-text-stroke: 2px #000000; /* crisp black outline */
+   paint-order: stroke fill;
+   /* multiple shadows to simulate thick offset toward bottom-right */
+   text-shadow:
+     1px 1px 0 #000000,
+     2px 2px 0 #000000,
+     3px 3px 0 #000000,
+     4px 4px 0 #000000,
+     /* slight stroke fallback for browsers lacking text-stroke */
+     -1px 0 0 #000000,
+     1px 0 0 #000000,
+     0 -1px 0 #000000,
+     0 1px 0 #000000;
+ }
+ 
+ @media (min-width: 768px) {
+   .text-outline {
+     -webkit-text-stroke: 4px #000000; /* desktop: stronger but scaled down */
+   }
+  .black-drop {
+    text-shadow: 0 2px 0 #000000, 0 3px 0 #000000;
+  }
+  .soft-drop {
+    filter: drop-shadow(0 3px 0 #000000);
+  }
+}
+
+/* ===================== */
+/* Events marquee styles */
+/* ===================== */
+.marquee {
+  position: relative;
+  overflow: hidden; /* hide overflow for seamless loop */
+}
+
+.marquee-track {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  width: max-content; /* shrink to content width */
+  animation: marquee-scroll var(--marquee-duration, 36s) linear infinite;
+  will-change: transform;
+}
+
+/* Helpers: direction and custom durations for marquee tracks */
+.marquee-reverse {
+  animation-direction: reverse;
+}
+.marquee-dur-42 {
+  --marquee-duration: 42s;
+}
+.marquee-dur-38 {
+  --marquee-duration: 38s;
+}
+.marquee-dur-46 {
+  --marquee-duration: 46s;
+}
+.marquee-dur-50 {
+  --marquee-duration: 50s;
+}
+
+.no-animate {
+  animation: none !important; /* allow JS-driven scroll */
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused; /* pause on hover */
+}
+
+.marquee-no-pause:hover .marquee-track {
+  animation-play-state: running !important;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%); /* content duplicated 2x for seamless loop */
+  }
+}
+
+/* Header strip shape and styling */
+.events-strip {
+  background-color: #1b1b1b;
+  border-left: 1px solid theme('colors.borderline');
+  border-right: 1px solid theme('colors.borderline');
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Edge fade mask over marquee content */
+.edge-fade {
+  position: relative;
+  /* Use a shared variable so the padding equals the overlay width */
+  --fade-w: clamp(12px, 6vw, 56px);
+  padding-inline: var(--fade-w);
+}
+.edge-fade::before,
+.edge-fade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--fade-w);
+  pointer-events: none;
+  z-index: 2;
+}
+.edge-fade::before {
+  left: 0;
+  /* Softer gradient so it doesn’t obscure the first card */
+  background: linear-gradient(to right, #141414 0%, rgba(20, 20, 20, 0.7) 45%, rgba(20, 20, 20, 0) 100%);
+}
+.edge-fade::after {
+  right: 0;
+  background: linear-gradient(to left, #141414 0%, rgba(20, 20, 20, 0.7) 45%, rgba(20, 20, 20, 0) 100%);
+}
+
+/* Softer/narrower version for Events section to avoid visible dark band */
+.events-edge-fade {
+  --fade-w: clamp(6px, 2.5vw, 24px);
+}
+.events-edge-fade::before {
+  background: linear-gradient(to right, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0) 100%);
+}
+.events-edge-fade::after {
+  background: linear-gradient(to left, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0) 100%);
+}
+
+/* Red dotted background for the Moments section */
+.red-dots {
+  background-color: #ef2d2d;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.5) 0.8px, rgba(0, 0, 0, 0) 0.8px);
+  background-size: 10px 10px;
+}
+
+/* Full-bleed section utility to break out of centered container */
+.section-bleed {
+  /* Fallback for older browsers */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  /* Prefer dynamic viewport units that exclude scrollbar width (Chromium/Edge/Safari latest) */
+  width: 100dvw;
+  margin-left: calc(50% - 50dvw);
+  margin-right: calc(50% - 50dvw);
+}
+
+/* Square aspect ratio utility */
+.sq {
+  aspect-ratio: 1 / 1;
+}
+
+/* ===================== */
+/* Rotating headline text */
+/* ===================== */
+.rotator-in {
+  animation: rotator-in var(--rotator-dur, 900ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: center;
+}
+.rotator-out {
+  animation: rotator-out var(--rotator-dur, 900ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: center;
+}
+
+/* Keep width stable to avoid jank when phrases change */
+.rotator-wrap {
+  min-width: var(--rotator-w, auto);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  /* On small screens, allow wrapping to avoid horizontal overflow */
+  .rotator-wrap {
+    min-width: auto;
+    white-space: normal;
+  }
+}
+
+@keyframes rotator-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+    filter: blur(6px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.06);
+    filter: blur(0);
+  }
+  70% {
+    transform: translateY(2px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes rotator-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(1.08);
+    filter: blur(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotator-in,
+  .rotator-out {
+    animation: none !important;
+  }
+}
+
+/* ===================== */
+/* Navbar: subtle edge fade */
+/* ===================== */
+.nav-scroll-fade {
+  position: relative;
+  --nav-fade-w: clamp(10px, 4vw, 48px);
+  padding-inline: var(--nav-fade-w);
+}
+.nav-scroll-fade::before,
+.nav-scroll-fade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--nav-fade-w);
+  pointer-events: none;
+  z-index: 2;
+}
+.nav-scroll-fade::before {
+  left: 0;
+  background: linear-gradient(to right, #1e1e1b 45%, rgba(30, 30, 27, 0));
+}
+.nav-scroll-fade::after {
+  right: 0;
+  background: linear-gradient(to left, #1e1e1b 45%, rgba(30, 30, 27, 0));
+}
+
+/* ===================== */
+/* Image crossfade utils */
+/* ===================== */
+@keyframes img-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+@keyframes img-fade-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.02);
+    filter: blur(6px);
+  }
+}
+.img-fade-in {
+  animation: img-fade-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.img-fade-out {
+  animation: img-fade-out 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ===================== */
+/* Momentum backgrounds  */
+/* ===================== */
+.momentum-bg {
+  background-color: #ef2d2d;
+  background-image:
+    radial-gradient(rgba(0,0,0,0.30) 0.8px, rgba(0,0,0,0) 0.8px),
+    radial-gradient(rgba(0,0,0,0.18) 1.2px, rgba(0,0,0,0) 1.2px),
+    radial-gradient(1200px 600px at 18% 28%, rgba(0,0,0,0.12), rgba(0,0,0,0) 60%),
+    radial-gradient(1000px 520px at 82% 72%, rgba(0,0,0,0.10), rgba(0,0,0,0) 60%);
+  background-size: 12px 12px, 18px 18px, auto, auto;
+  background-blend-mode: normal, normal, multiply, multiply;
+}
+
+.momentum-pin-bg {
+  background-color: #ef2d2d;
+  background-image:
+    radial-gradient(rgba(0,0,0,0.30) 0.8px, rgba(0,0,0,0) 0.8px),
+    radial-gradient(rgba(0,0,0,0.18) 1.2px, rgba(0,0,0,0) 1.2px),
+    radial-gradient(1200px 600px at 18% 28%, rgba(0,0,0,0.12), rgba(0,0,0,0) 60%),
+    radial-gradient(1000px 520px at 82% 72%, rgba(0,0,0,0.10), rgba(0,0,0,0) 60%);
+  background-size: 12px 12px, 18px 18px, auto, auto;
+  background-blend-mode: normal, normal, multiply, multiply;
+}
+
+/* ===================== */
+/* Bottle-Glass meet CSS */
+/* ===================== */
+/* light dotted paper background overlay */
+.paper-dots {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.35) 0.6px, rgba(0, 0, 0, 0) 0.6px);
+  background-size: 10px 10px;
+  opacity: 0.25;
+}
+
+/* Lighter dotted overlay (for red sections) */
+.paper-dots-lite {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.22) 0.8px, rgba(0, 0, 0, 0) 0.8px);
+  background-size: 8px 8px;
+  opacity: 0.22;
+}
+
+/* vertical dashed center line */
+
+/* horizontal dashed connector */
+.h-dash {
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.55) 0px,
+    rgba(0, 0, 0, 0.55) 6px,
+    rgba(0, 0, 0, 0) 6px,
+    rgba(0, 0, 0, 0) 14px
+  );
+  opacity: 0.7;
+}
+
+/* ===================== */
+/* Reveal on scroll utils */
+/* ===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+.reveal-left {
+  transform: translateX(-20px);
+}
+.reveal-right {
+  transform: translateX(20px);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
