@@ -157,7 +157,7 @@ export default function BottleGlassMeet() {
   // On small screens the previous fixed ±260px nudges pushed items off-screen.
   // Use a small, viewport-scaled gap so they meet near the center on phones/tablets.
   const meetingGapPx = Math.max(6, Math.min(20, vwSSR * 0.025));
-  const bottleBiasPx = Math.max(6, Math.min(16, vwSSR * 0.01)); // extra nudge to guarantee left-of-line
+  const bottleBiasPx = Math.max(12, Math.min(28, vwSSR * 0.02)); // stronger nudge to guarantee left-of-line
   const bottleTargetX = centerX - leftOffset - meetingGapPx - bottleWUsed - bottleBiasPx;
   const glassTargetX = centerX + rightOffset + meetingGapPx;
 
@@ -166,9 +166,10 @@ export default function BottleGlassMeet() {
   const translateGlass = (glassTargetX - glassStartX) * movementEase;
 
   // Rotations: base easing plus a brief inward tilt for the cheers
-  const inwardTilt = 6 * cheersPulse; // deg
-  const glassRotate = -3 * Math.sin(used * Math.PI) * (1 - used) - inwardTilt;
-  const bottleRotate = 3 * Math.sin(used * Math.PI) * (1 - used) + inwardTilt;
+  const inwardTiltGlass = 6 * cheersPulse; // deg
+  const inwardTiltBottle = 4 * cheersPulse; // slightly less tilt to avoid crossing
+  const glassRotate = -3 * Math.sin(used * Math.PI) * (1 - used) - inwardTiltGlass;
+  const bottleRotate = 3 * Math.sin(used * Math.PI) * (1 - used) + inwardTiltBottle;
 
   // Minor lift & scale at the peak to sell the "clink"
   const cheersLiftPx = 6 * cheersPulse;
@@ -214,7 +215,7 @@ export default function BottleGlassMeet() {
           {/* Bottle (left) */}
           <div
             ref={bottleRef}
-            className="relative w-[160px] h-auto transition-transform duration-300 ease-out"
+            className="relative inline-block h-auto transition-transform duration-300 ease-out"
             style={{
               transform: `translateY(-50%) translateY(${-cheersLiftPx}px) translateX(${translateBottle}px) rotate(${bottleRotate}deg) scale(${cheersScale})`,
               transformOrigin: 'right center',
@@ -239,7 +240,7 @@ export default function BottleGlassMeet() {
           {/* Glass (right) */}
           <div
             ref={glassRef}
-            className="absolute select-none"
+            className="absolute inline-block select-none"
             style={{
               right: `${sideInsetPct}%`,
               top: '48%',
