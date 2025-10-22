@@ -120,6 +120,8 @@ export default function BottleGlassMeet() {
   // Calculate the center line position (SSR-safe)
   const vwSSR = typeof window === 'undefined' ? 0 : window.innerWidth;
   const centerX = vwSSR / 2;
+  // Dynamic side inset: keep items a bit closer to center on small screens
+  const sideInsetPct = vwSSR < 640 ? 8 : vwSSR < 1024 ? 12 : 15;
   
   // "Cheers" phase near the end: items lean in, get closer, then settle
   const CHEERS_START = 0.88; // when the cheers micro-animation begins
@@ -135,9 +137,9 @@ export default function BottleGlassMeet() {
   const leftOffset = Math.max(MIN_OFFSET, LEFT_BASE_OFFSET - PULL_MAX * cheersPulse);
   const rightOffset = Math.max(MIN_OFFSET, RIGHT_BASE_OFFSET - PULL_MAX * cheersPulse);
 
-  // Start anchors
-  const glassStartX = vwSSR * 0.15; // 15% from left
-  const bottleStartX = vwSSR * 0.85; // 15% from right
+  // Start anchors (approximate from left)
+  const bottleStartX = vwSSR * (sideInsetPct / 100); // bottle is placed from left by side inset
+  const glassStartX = vwSSR * ((100 - sideInsetPct) / 100); // glass approximated from the right side
 
   // Targets that respect clamping to each side of the dotted line
   // On small screens the previous fixed ±260px nudges pushed items off-screen.
@@ -148,9 +150,9 @@ export default function BottleGlassMeet() {
   const glassTargetX = centerX - leftOffset + LEFT_FINAL_NUDGE_PX;
   const bottleTargetX = centerX + rightOffset + BOTTLE_FINAL_NUDGE_PX;
 
-  // Translations toward their targets
-  const translateLeft = (glassTargetX - glassStartX) * movementEase;
-  const translateRight = (bottleTargetX - bottleStartX) * movementEase;
+  // Translations toward their targets, per element
+  const translateBottle = (bottleTargetX - bottleStartX) * movementEase;
+  const translateGlass = (glassTargetX - glassStartX) * movementEase;
 
   // Rotations: base easing plus a brief inward tilt for the cheers
   const inwardTilt = 6 * cheersPulse; // deg
@@ -203,10 +205,10 @@ export default function BottleGlassMeet() {
             ref={bottleRef}
             className="relative w-[160px] h-auto transition-transform duration-300 ease-out"
             style={{
-              transform: `translateY(-50%) translateY(${-cheersLiftPx}px) translateX(${translateLeft}px) rotate(${bottleRotate}deg) scale(${cheersScale})`,
+              transform: `translateY(-50%) translateY(${-cheersLiftPx}px) translateX(${translateBottle}px) rotate(${bottleRotate}deg) scale(${cheersScale})`,
               transformOrigin: 'right center',
               position: 'absolute',
-              left: '15%',
+              left: `${sideInsetPct}%`,
               top: '48%',
               willChange: 'transform',
               zIndex: 78,
@@ -216,7 +218,7 @@ export default function BottleGlassMeet() {
             <Image
               src={bottle}
               alt="Bottle"
-              className="w-[26vw] max-w-[300px] h-auto pointer-events-none"
+              className="w-[42vw] sm:w-[34vw] md:w-[28vw] min-w-[120px] max-w-[300px] h-auto pointer-events-none"
               priority
               onLoadingComplete={recomputeDistances}
               draggable={false}
@@ -228,9 +230,9 @@ export default function BottleGlassMeet() {
             ref={glassRef}
             className="absolute select-none"
             style={{
-              right: '15%',
+              right: `${sideInsetPct}%`,
               top: '48%',
-              transform: `translateY(-50%) translateY(${-cheersLiftPx}px) translateX(${translateRight}px) rotate(${glassRotate}deg) scale(${cheersScale})`,
+              transform: `translateY(-50%) translateY(${-cheersLiftPx}px) translateX(${translateGlass}px) rotate(${glassRotate}deg) scale(${cheersScale})`,
               transformOrigin: 'left center',
               willChange: 'transform',
               zIndex: 78,
@@ -240,7 +242,7 @@ export default function BottleGlassMeet() {
             <Image
               src={glass}
               alt="Glass"
-              className="w-[26vw] max-w-[340px] h-auto pointer-events-none"
+              className="w-[42vw] sm:w-[34vw] md:w-[28vw] min-w-[120px] max-w-[340px] h-auto pointer-events-none"
               priority
               onLoadingComplete={recomputeDistances}
               draggable={false}
