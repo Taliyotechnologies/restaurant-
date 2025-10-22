@@ -19,6 +19,8 @@ export default function BottleGlassMeet() {
   const bottleRef = useRef<HTMLDivElement | null>(null);
   const glassRef = useRef<HTMLDivElement | null>(null);
   const [shifts, setShifts] = useState({ left: 0, right: 0 });
+  const [bottleW, setBottleW] = useState(0);
+  const [glassW, setGlassW] = useState(0);
   // UI tunables - adjusted for better visibility and touching animation
   const LINE_TOP_PCT = 12; // add a little top gap
   const LINE_BOTTOM_PCT = 1; // bring line slightly closer to bottom to reduce gap
@@ -96,6 +98,8 @@ export default function BottleGlassMeet() {
     const glassShift = targetGlassLeft - startGlassLeft; // negative px
 
     setShifts({ left: bottleShift, right: glassShift });
+    setBottleW(bottleWidth);
+    setGlassW(glassWidth);
   }, [
     START_OFFSET_VW,
     CENTER_SHIFT_VW,
@@ -122,6 +126,14 @@ export default function BottleGlassMeet() {
   const centerX = vwSSR / 2;
   // Dynamic side inset: keep items a bit closer to center on small screens
   const sideInsetPct = vwSSR < 640 ? 8 : vwSSR < 1024 ? 12 : 15;
+  const sideInsetPx = vwSSR * (sideInsetPct / 100);
+  const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
+  const bottlePct = vwSSR < 640 ? 0.42 : vwSSR < 1024 ? 0.34 : 0.28;
+  const glassPct = bottlePct;
+  const approxBottleW = clamp(vwSSR * bottlePct, 120, 300);
+  const approxGlassW = clamp(vwSSR * glassPct, 120, 340);
+  const bottleWUsed = bottleW || approxBottleW;
+  const glassWUsed = glassW || approxGlassW;
   
   // "Cheers" phase near the end: items lean in, get closer, then settle
   const CHEERS_START = 0.88; // when the cheers micro-animation begins
@@ -138,15 +150,15 @@ export default function BottleGlassMeet() {
   const rightOffset = Math.max(MIN_OFFSET, RIGHT_BASE_OFFSET - PULL_MAX * cheersPulse);
 
   // Start anchors (approximate from left)
-  const bottleStartX = vwSSR * (sideInsetPct / 100); // bottle is placed from left by side inset
-  const glassStartX = vwSSR * ((100 - sideInsetPct) / 100); // glass approximated from the right side
+  const bottleStartX = sideInsetPx;
+  const glassStartX = vwSSR - sideInsetPx - glassWUsed;
 
   // Targets that respect clamping to each side of the dotted line
   // On small screens the previous fixed ±260px nudges pushed items off-screen.
   // Use a small, viewport-scaled gap so they meet near the center on phones/tablets.
-  const meetingGapPx = Math.max(0, Math.min(20, vwSSR * 0.025)); // 0–20px based on width
-  // Bottle should finish LEFT of the dotted line, glass to the RIGHT
-  const bottleTargetX = centerX - leftOffset - meetingGapPx;
+  const meetingGapPx = Math.max(6, Math.min(20, vwSSR * 0.025));
+  const bottleBiasPx = Math.max(6, Math.min(16, vwSSR * 0.01)); // extra nudge to guarantee left-of-line
+  const bottleTargetX = centerX - leftOffset - meetingGapPx - bottleWUsed - bottleBiasPx;
   const glassTargetX = centerX + rightOffset + meetingGapPx;
 
   // Translations toward their targets, per element
