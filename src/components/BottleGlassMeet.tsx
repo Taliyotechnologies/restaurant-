@@ -145,10 +145,9 @@ export default function BottleGlassMeet() {
   // On small screens the previous fixed ±260px nudges pushed items off-screen.
   // Use a small, viewport-scaled gap so they meet near the center on phones/tablets.
   const meetingGapPx = Math.max(0, Math.min(20, vwSSR * 0.025)); // 0–20px based on width
-  const LEFT_FINAL_NUDGE_PX = -meetingGapPx;
-  const BOTTLE_FINAL_NUDGE_PX = -meetingGapPx; // move bottle to the left side of the line
-  const glassTargetX = centerX - leftOffset + LEFT_FINAL_NUDGE_PX;
-  const bottleTargetX = centerX + rightOffset + BOTTLE_FINAL_NUDGE_PX;
+  // Bottle should finish LEFT of the dotted line, glass to the RIGHT
+  const bottleTargetX = centerX - leftOffset - meetingGapPx;
+  const glassTargetX = centerX + rightOffset + meetingGapPx;
 
   // Translations toward their targets, per element
   const translateBottle = (bottleTargetX - bottleStartX) * movementEase;
