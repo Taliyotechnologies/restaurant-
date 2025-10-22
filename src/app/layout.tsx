@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ViewportFix from "@/components/ViewportFix";
 import FixedBottomCTAs from "@/components/FixedBottomCTAs";
+import logoImg from "@/assets/logo.png";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -16,6 +17,9 @@ export const metadata: Metadata = {
   description:
     "Buda's Pub: events, menu, blog, book a table, and contact us. Local neighborhood bar & grill.",
   applicationName: "Buda's Pub",
+  icons: {
+    icon: logoImg.src,
+  },
   openGraph: {
     title: "Buda's Pub",
     description:
