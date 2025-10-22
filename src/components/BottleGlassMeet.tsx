@@ -146,7 +146,7 @@ export default function BottleGlassMeet() {
   // Use a small, viewport-scaled gap so they meet near the center on phones/tablets.
   const meetingGapPx = Math.max(0, Math.min(20, vwSSR * 0.025)); // 0–20px based on width
   const LEFT_FINAL_NUDGE_PX = -meetingGapPx;
-  const BOTTLE_FINAL_NUDGE_PX = meetingGapPx;
+  const BOTTLE_FINAL_NUDGE_PX = -meetingGapPx; // move bottle to the left side of the line
   const glassTargetX = centerX - leftOffset + LEFT_FINAL_NUDGE_PX;
   const bottleTargetX = centerX + rightOffset + BOTTLE_FINAL_NUDGE_PX;
 
