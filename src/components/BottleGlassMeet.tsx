@@ -115,11 +115,13 @@ export default function BottleGlassMeet() {
   }, [recomputeDistances]);
 
   // Animation timing and easing - adjusted for better visibility
-  const lockAt = 0.85; // Complete animation earlier for better visibility
+  const lockAt = 0.85; // Complete animation earlier but still hit final target
   const used = Math.min(progress, lockAt);
   
   // Calculate movement with explicit left/right constraints
-  const movementEase = 1 - Math.pow(1 - used, 2); // Ease-out quad
+  // Ease-out quad that reaches 1.0 exactly at lockAt
+  const usedNorm = lockAt > 0 ? Math.min(1, used / lockAt) : used;
+  const movementEase = Math.min(1, 1 - Math.pow(1 - usedNorm, 2));
   
   // Calculate the center line position (SSR-safe)
   const vwSSR = typeof window === 'undefined' ? 0 : window.innerWidth;
@@ -127,6 +129,8 @@ export default function BottleGlassMeet() {
   // Dynamic side inset: keep items a bit closer to center on small screens
   const sideInsetPct = vwSSR < 640 ? 8 : vwSSR < 1024 ? 12 : 15;
   const sideInsetPx = vwSSR * (sideInsetPct / 100);
+  const glassSideInsetPct = Math.max(0, sideInsetPct - 10);
+  const glassSideInsetPx = vwSSR * (glassSideInsetPct / 100);
   const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
   const bottlePct = vwSSR < 640 ? 0.42 : vwSSR < 1024 ? 0.34 : 0.28;
   const glassPct = bottlePct;
@@ -151,15 +155,29 @@ export default function BottleGlassMeet() {
 
   // Start anchors (approximate from left)
   const bottleStartX = sideInsetPx;
-  const glassStartX = vwSSR - sideInsetPx - glassWUsed;
+  const glassStartBoostPx = Math.max(60, vwSSR * 0.08);
+  const glassStartX = vwSSR - glassSideInsetPx - glassWUsed + glassStartBoostPx;
 
   // Targets that respect clamping to each side of the dotted line
   // On small screens the previous fixed ±260px nudges pushed items off-screen.
   // Use a small, viewport-scaled gap so they meet near the center on phones/tablets.
   const meetingGapPx = Math.max(6, Math.min(20, vwSSR * 0.025));
   const bottleBiasPx = Math.max(12, Math.min(28, vwSSR * 0.02)); // stronger nudge to guarantee left-of-line
-  const bottleTargetX = centerX - leftOffset - meetingGapPx - bottleWUsed - bottleBiasPx;
-  const glassTargetX = centerX + rightOffset + meetingGapPx;
+  const extraNudgePx = Math.max(0, meetingGapPx - 1);
+  const userBoostPx = 96;
+  const bottleEndNudgePx = Math.min(236, bottleBiasPx + meetingGapPx + extraNudgePx + userBoostPx);
+  const bottleMeetingGapPx = Math.max(-18, meetingGapPx - 18);
+  const desiredBottleTargetX = centerX - leftOffset - bottleMeetingGapPx - bottleWUsed - bottleBiasPx + bottleEndNudgePx;
+  const lineBiasLeftPx = -1; // 1px inside the left side of the line
+  const safeGapPx = 0; // do not cross the line
+  const bottleLineNudgePx = 155; // shift a bit further left from the line
+  const bottleMaxX = centerX - leftOffset + lineBiasLeftPx + bottleLineNudgePx - bottleWUsed; // clamp to near-left of line
+  const bottleTargetX = Math.min(desiredBottleTargetX, bottleMaxX);
+  const lineBiasRightPx = 1; // 1px inside the right side of the line
+  const CONTACT_GAP_PX = -6; // tiny negative so borders visually touch
+  const remPx = typeof window === 'undefined' ? 16 : (parseFloat(getComputedStyle(document.documentElement).fontSize) || 16);
+  const glassExtraLeftPx = remPx * 4; // nudge slightly more right
+  const glassTargetX = bottleTargetX + bottleWUsed + CONTACT_GAP_PX - glassExtraLeftPx;
 
   // Translations toward their targets, per element
   const translateBottle = (bottleTargetX - bottleStartX) * movementEase;

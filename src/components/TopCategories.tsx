@@ -51,33 +51,9 @@ export default function TopCategories() {
     const onScroll = () => recalc();
     wrap.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", recalc);
-
-    const onMove = (e: PointerEvent) => {
-      if (!isDragging.current) return;
-      const wrapEl = wrapRef.current;
-      const track = trackRef.current;
-      if (!wrapEl || !track) return;
-      const total = wrapEl.scrollWidth;
-      const view = wrapEl.clientWidth;
-      const maxPx = Math.max(0, track.clientWidth - handleW);
-      const dx = e.clientX - dragStartX.current;
-      const newHandle = Math.max(0, Math.min(maxPx, dragStartHandleLeft.current + dx));
-      const proportion = maxPx > 0 ? newHandle / maxPx : 0;
-      wrapEl.scrollLeft = proportion * Math.max(0, total - view);
-    };
-    const onUp = () => {
-      isDragging.current = false;
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerup", onUp, { passive: true });
-    window.addEventListener("pointercancel", onUp, { passive: true });
-
     return () => {
       wrap.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", recalc);
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerup", onUp);
-      window.removeEventListener("pointercancel", onUp);
     };
   }, [handleW, recalc]);
 
@@ -163,13 +139,28 @@ export default function TopCategories() {
             <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-goldbeige/70" />
             <div
               className="absolute top-1/2 -translate-y-1/2 h-[10px] cursor-ew-resize"
-              style={{ left: `${handleLeftPx}px`, width: `${handleW}px` }}
+              style={{ left: `${handleLeftPx}px`, width: `${handleW}px`, touchAction: 'none' }}
               onPointerDown={(e) => {
                 isDragging.current = true;
                 dragStartX.current = e.clientX;
                 dragStartHandleLeft.current = handleLeftPx;
                 (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
               }}
+              onPointerMove={(e) => {
+                if (!isDragging.current) return;
+                const wrapEl = wrapRef.current;
+                const track = trackRef.current;
+                if (!wrapEl || !track) return;
+                const total = wrapEl.scrollWidth;
+                const view = wrapEl.clientWidth;
+                const maxPx = Math.max(0, track.clientWidth - handleW);
+                const dx = e.clientX - dragStartX.current;
+                const newHandle = Math.max(0, Math.min(maxPx, dragStartHandleLeft.current + dx));
+                const proportion = maxPx > 0 ? newHandle / maxPx : 0;
+                wrapEl.scrollLeft = proportion * Math.max(0, total - view);
+              }}
+              onPointerUp={() => { isDragging.current = false; }}
+              onPointerCancel={() => { isDragging.current = false; }}
             >
               <div className="h-full w-full bg-[#ef2d2d] border border-black shadow-[0_0_0_1px_rgba(0,0,0,0.35)]" />
             </div>

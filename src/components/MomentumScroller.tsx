@@ -38,6 +38,8 @@ export default function MomentumScroller() {
   const targetDxRef = useRef(0);
   // Internal ref mirror of dx for the lerp loop
   const dxRef = useRef(0);
+  // Track previous fixed state to detect entering/leaving the pinned range
+  const wasFixedRef = useRef(false);
 
   // Recalculate dimensions whenever viewport or fonts change
   useEffect(() => {
@@ -111,11 +113,15 @@ export default function MomentumScroller() {
       setFixed(isFixedNow);
       targetDxRef.current = target;
 
-      // When entering the section from either edge (not fixed), sync immediately
-      if (!isFixedNow) {
+      // Sync immediately when crossing the boundary (entering or leaving),
+      // so we don't show a blank background before content catches up.
+      if (!isFixedNow || wasFixedRef.current !== isFixedNow) {
         dxRef.current = target;
         setDx(target);
       }
+
+      // Remember current fixed state for next frame
+      wasFixedRef.current = isFixedNow;
 
       anim = 0;
     };
