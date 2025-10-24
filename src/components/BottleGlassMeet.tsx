@@ -198,7 +198,7 @@ export default function BottleGlassMeet() {
 
   return (
     <div>
-      <section ref={containerRef} className="section-bleed relative h-[120svh] bg-transparent">
+      <section ref={containerRef} className="section-bleed relative h-[120svh] bg-transparent hidden md:block">
         {/* Background image (bordered variant) fills entire section */}
         <Image
           src={bgBorder}
