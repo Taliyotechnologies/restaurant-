@@ -23,7 +23,7 @@ export default function BottleGlassMeet() {
   const [glassW, setGlassW] = useState(0);
   // UI tunables - adjusted for better visibility and touching animation
   const LINE_TOP_PCT = 12; // add a little top gap
-  const LINE_BOTTOM_PCT = 1; // bring line slightly closer to bottom to reduce gap
+  const LINE_BOTTOM_PCT = 2; // slightly larger bottom gap so the red dot won't get clipped
   const BOTTLE_NUDGE_PX = 0; // center alignment
   const GLASS_NUDGE_PX = 0; // center alignment
   const CENTER_SHIFT_VW = 0; // centered
@@ -176,7 +176,7 @@ export default function BottleGlassMeet() {
   const lineBiasRightPx = 1; // 1px inside the right side of the line
   const CONTACT_GAP_PX = -6; // tiny negative so borders visually touch
   const remPx = typeof window === 'undefined' ? 16 : (parseFloat(getComputedStyle(document.documentElement).fontSize) || 16);
-  const glassExtraLeftPx = remPx * 4; // nudge slightly more right
+  const glassExtraLeftPx = remPx * 3.75; // nudge slightly more right
   const glassTargetX = bottleTargetX + bottleWUsed + CONTACT_GAP_PX - glassExtraLeftPx;
 
   // Translations toward their targets, per element
@@ -222,7 +222,7 @@ export default function BottleGlassMeet() {
 
         {/* Moving red dot along the dashed line */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 z-[80] pointer-events-none"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-[90] pointer-events-none"
           style={{ top: `${dotTop}%` }}
           aria-hidden
         >

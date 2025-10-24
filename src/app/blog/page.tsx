@@ -58,15 +58,15 @@ export default function BlogPage({
 
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-3">
             <div className="relative w-full max-w-[560px]">
-              <div className="relative flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 border border-black bg-transparent px-3 py-2 shadow-[0_2px_0_#000]">
+              <div className="relative flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 border border-black bg-transparent px-3 py-3 sm:py-2 shadow-[0_2px_0_#000]">
                 <input
                   type="email"
                   placeholder="What is your email address? *"
-                  className="flex-1 min-w-0 w-full sm:w-auto h-10 md:h-12 rounded-sm border border-black bg-[#fbf3dd] px-4 text-sm md:text-base text-neutral-900 placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-black/40"
+                  className="flex-1 min-w-0 w-full sm:w-auto h-16 md:h-12 rounded-sm border border-black bg-[#fbf3dd] px-4 text-base md:text-base text-neutral-900 placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-black/40"
                 />
                 <button
                   type="button"
-                  className="w-full sm:w-auto shrink-0 px-5 md:px-6 h-10 md:h-12 bg-[#ef2d2d] text-black border-2 border-black rounded-sm font-semibold text-sm md:text-base shadow-[0_2px_0_#000]"
+                  className="w-full sm:w-auto shrink-0 px-6 md:px-6 h-16 md:h-12 bg-[#ef2d2d] text-black border-2 border-black rounded-sm font-semibold text-base md:text-base shadow-[0_2px_0_#000]"
                 >
                   I subscribe
                 </button>
@@ -79,16 +79,16 @@ export default function BlogPage({
             <div className="h-[2px] bg-black/60" />
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
               <div className="flex items-center gap-2 flex-wrap">
-                <button type="button" className="px-2 py-1.5 bg-[#ef2d2d] text-black border-2 border-black rounded-sm shadow-[0_2px_0_#000] text-xs md:text-sm">All</button>
-                <button type="button" className="px-2 py-1.5 bg-transparent text-black border border-black rounded-sm shadow-[2px_2px_0_#000] text-xs md:text-sm">Recipe</button>
+                <button type="button" className="px-3 py-2 bg-[#ef2d2d] text-black border-2 border-black rounded-sm shadow-[0_2px_0_#000] text-sm md:text-base">All</button>
+                <button type="button" className="px-3 py-2 bg-transparent text-black border border-black rounded-sm shadow-[2px_2px_0_#000] text-sm md:text-base">Recipe</button>
               </div>
               <form className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
                 <input
                   type="text"
                   placeholder="search"
-                  className="flex-1 min-w-0 w-full sm:w-[220px] h-9 md:h-10 rounded-sm border border-black bg-[#fbf3dd] px-3 text-xs md:text-sm text-neutral-900 placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-black/40"
+                  className="flex-1 min-w-0 w-full sm:w-[260px] h-16 md:h-12 rounded-sm border border-black bg-[#fbf3dd] px-4 text-base md:text-base text-neutral-900 placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-black/40"
                 />
-                <button type="submit" className="w-full sm:w-auto shrink-0 whitespace-nowrap px-3 md:px-4 h-9 md:h-10 bg-[#ef2d2d] text-black border-2 border-black rounded-sm font-semibold text-xs md:text-sm shadow-[0_2px_0_#000]">Search</button>
+                <button type="submit" className="w-full sm:w-auto shrink-0 whitespace-nowrap px-5 md:px-6 h-16 md:h-12 bg-[#ef2d2d] text-black border-2 border-black rounded-sm font-semibold text-base md:text-base shadow-[0_2px_0_#000]">Search</button>
               </form>
             </div>
           </div>
